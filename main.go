@@ -7,11 +7,17 @@ import (
 	"net/http"
 
 	"github.com/go-chi/chi/v5"
+	"github.com/go-chi/chi/v5/middleware"
 )
 
 func main() {
+	// Create a new router
 	router := chi.NewRouter()
 
+	// Log all requests to the console
+	router.Use(middleware.Logger)
+
+	// Handle requests to the /hello path
 	router.Get("/hello", basicHandler)
 
 	server := &http.Server{
